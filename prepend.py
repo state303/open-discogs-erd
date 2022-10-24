@@ -9,20 +9,20 @@ if len(sys.argv) < 2:
     print('missing path argument')
     exit(1)
 
-if len(sys.argv) == 3:
+if len(sys.argv) >= 3:
     project_name = sys.argv[2]
 
-if len(sys.argv) == 4:
+if len(sys.argv) >= 4:
     database_type = sys.argv[3]
 
-def get_prepend(name, db_type, readme):
+def get_prepend(project_name, db_type, readme):
     return '''Project {} {{
     database_type: \'{}\'
     note: \'\'\'
 {}
 \'\'\'
 }}
-'''.format(name.strip().replace(' ', ''), db_type.strip(), readme.strip())
+'''.format(project_name.strip().replace(' ', ''), db_type.strip(), readme.strip())
 
 def get_indent(depth):
     return '    '*depth
