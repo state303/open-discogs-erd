@@ -22,7 +22,7 @@ def get_prepend(name, db_type, readme):
 {}
 \'\'\'
 }}
-'''.format(name.strip().replace(' ', ''), db_type.strip(), readme.strip())
+'''.format(name.strip(), db_type.strip(), readme.strip())
 
 def get_indent(depth):
     return '    '*depth
