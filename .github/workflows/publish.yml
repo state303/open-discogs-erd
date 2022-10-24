@@ -39,10 +39,8 @@ jobs:
         run: dbdocs
       - name: ✨ Checkout repository
         uses: actions/checkout@v3
-      - name: 🎱 Write prepend files
-        run: |
-          python prepend.py database.dbml 'Open Discogs Beta'
-	        python prepend.py database.dbml 'Open Discogs'
+      - name: 🎱 Write prepended dbml
+        run: python prepend.py database.dbml 'Open Discogs Beta' && python prepend.py database.dbml 'Open Discogs'
       - name: 📦 Update dbdocs main project
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
