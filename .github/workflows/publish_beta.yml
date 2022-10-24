@@ -6,8 +6,8 @@ on:
       - beta
   workflow_run:
     workflows: ["Release"]
-  types:
-    - completed
+    types:
+      - completed
   workflow_dispatch:
   
 jobs:
