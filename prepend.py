@@ -12,6 +12,9 @@ if len(sys.argv) < 2:
 if len(sys.argv) == 3:
     project_name = sys.argv[2]
 
+if len(sys.argv) == 4:
+    database_type = sys.argv[3]
+
 def get_prepend(name, db_type, readme):
     return '''Project {} {{
     database_type: \'{}\'
