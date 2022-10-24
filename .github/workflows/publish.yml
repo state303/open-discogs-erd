@@ -20,6 +20,8 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
           extra-files: |
             database.dbml
+            prepend.py
+            shift.py
             README.md
           pull-request-title-pattern: "chore${scope}: release${component} v${version}"
           package-name: "open-discogs-erd"
