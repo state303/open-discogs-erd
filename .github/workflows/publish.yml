@@ -18,7 +18,9 @@ jobs:
         with:
           release-type: simple
           token: ${{ secrets.ACCESS_TOKEN }}
-          extra-files: database.dbml
+          extra-files: |
+            database.dbml
+            README.md
           pull-request-title-pattern: "chore${scope}: release${component} v${version}"
           package-name: "open-discogs-erd"
     outputs:
