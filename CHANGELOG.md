@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/state303/open-discogs-erd/compare/v1.0.0...v1.0.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* updates types and namings ([1dba2a5](https://github.com/state303/open-discogs-erd/commit/1dba2a54d66a1a0370429af55c816c3aab763e90))
+
 ## 1.0.0 (2022-10-24)
 
 
