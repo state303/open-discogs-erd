@@ -1,4 +1,4 @@
-Project Open Discogs {
+Project OpenDiscogs {
     database_type: 'PostgreSQL'
     note: '''
 [//]: # ( {x-release-please-start-version} )
@@ -9,11 +9,13 @@ ERD, SQL Schema for Open Discogs Project
 }
 
 Table "style" {
-  "name" VARCHAR(50) [pk, not null]
+  "id" INTEGER [pk, not null, increment]
+  "name" VARCHAR(50) [not null, unique]
 }
 
 Table "genre" {
-  "name" VARCHAR(50) [pk, not null]
+  "id" INTEGER [pk, not null, increment]
+  "name" VARCHAR(50) [not null, unique]
 }
 
 Table "artist" {
@@ -37,63 +39,56 @@ Table "master" {
   "id" INTEGER [pk, not null]
   "data_quality" VARCHAR(100)
   "title" VARCHAR(2000)
+  "main_release_id" INTEGER
   "released_year" SMALLINT [not null, default: `-1`]
 }
 
 Table "release" {
   "id" INTEGER [pk, not null]
+  "title" VARCHAR(10000)
   "country" VARCHAR(100)
   "data_quality" VARCHAR(100)
-  "released_day" TINYINT [not null, default: `-1`]
-  "released_month" TINYINT [not null, default: `-1`]
   "released_year" SMALLINT [not null, default: `-1`]
+  "released_month" TINYINT [not null, default: `-1`]
+  "released_day" TINYINT [not null, default: `-1`]
   "listed_release_date" VARCHAR(255)
   "is_master" BOOLEAN
-  "master_id" INTEGER
   "notes" TEXT
   "status" VARCHAR(255)
-  "title" VARCHAR(10000)
 }
 
 Table "release_genre" {
   "release_id" INTEGER [not null]
-  "genre" VARCHAR(255) [not null]
-
-Indexes {
-  (release_id, genre) [pk]
-}
+  "genre_id" INTEGER [not null]
+  Indexes {
+    (release_id, genre_id) [pk]
+  }
 }
 
 Table "release_track" {
+  "id" INTEGER [pk, not null, increment]
   "release_id" INTEGER [not null]
-  "title_duration_position_hash" INTEGER [not null]
   "duration" VARCHAR(1500)
   "position" VARCHAR(1500)
   "title" VARCHAR(10000)
-
-Indexes {
-  (release_id, title_duration_position_hash) [pk]
-}
 }
 
 Table "label_release" {
   "label_id" INTEGER [not null]
   "release_id" INTEGER [not null]
   "category_notation" VARCHAR(1000)
-
-Indexes {
-  (label_id, release_id) [pk]
-}
+  Indexes {
+    (label_id, release_id) [pk]
+  }
 }
 
 Table "release_image" {
   "release_id" INTEGER [not null]
   "url_hash" INTEGER [not null]
   "url" VARCHAR(2048) [not null]
-
-Indexes {
-  (release_id, url_hash) [pk]
-}
+  Indexes {
+    (release_id, url_hash) [pk]
+  }
 }
 
 Table "release_contract" {
@@ -101,61 +96,54 @@ Table "release_contract" {
   "label_id" INTEGER [not null]
   "contract_hash" INTEGER [not null]
   "contract" VARCHAR(5000) [not null]
-
-Indexes {
-  (release_id, label_id, contract_hash) [pk]
-}
+  Indexes {
+    (release_id, label_id, contract_hash) [pk]
+  }
 }
 
 Table "release_identifier" {
+  "id" INTEGER [pk, not null, increment]
   "release_id" INTEGER [not null]
-  "type_value_description_hash" INTEGER [not null]
   "description" VARCHAR(20000)
   "type" VARCHAR(2500)
   "value" VARCHAR(20000)
-
-Indexes {
-  (release_id, type_value_description_hash) [pk]
-}
 }
 
 Table "master_video" {
   "master_id" INTEGER [not null]
-  "title_description_url_hash" INTEGER [not null]
+  "url_hash" INTEGER [not null]
+  "url" VARCHAR(2048) [not null]
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
-  "url" VARCHAR(2048) [not null]
-
-Indexes {
-  (master_id, title_description_url_hash) [pk]
-}
+  Indexes {
+    (master_id, url_hash) [pk]
+  }
 }
 
 Table "master_genre" {
   "master_id" INTEGER [not null]
-  "genre" VARCHAR(255) [not null]
-
-Indexes {
-  (master_id, genre) [pk]
-}
+  "genre_id" INTEGER [not null]
+  Indexes {
+    (master_id, genre_id) [pk]
+  }
 }
 
 Table "master_style" {
   "master_id" INTEGER [not null]
-  "style" VARCHAR(255) [not null]
+  "style_id" INTEGER [not null]
 
-Indexes {
-  (master_id, style) [pk]
-}
+  Indexes {
+    (master_id, style_id) [pk]
+  }
 }
 
 Table "release_style" {
   "release_id" INTEGER [not null]
-  "style" VARCHAR(255) [not null]
+  "style_id" INTEGER [not null]
 
-Indexes {
-  (release_id, style) [pk]
-}
+  Indexes {
+    (release_id, style_id) [pk]
+  }
 }
 
 Table "release_video" {
@@ -163,53 +151,45 @@ Table "release_video" {
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
   "url" VARCHAR(2048) [not null]
-  "title_description_url_hash" INTEGER [not null]
-
-Indexes {
-  (release_id, title_description_url_hash) [pk]
-}
+  "url_hash" INTEGER [not null]
+  Indexes {
+    (release_id, url_hash) [pk]
+  }  
 }
 
 Table "label_url" {
   "label_id" INTEGER [not null]
   "url_hash" INTEGER [not null]
   "url" VARCHAR(2048) [not null]
-
-Indexes {
-  (label_id, url_hash) [pk]
-}
+  Indexes {
+    (label_id, url_hash) [pk]
+  }
 }
 
 Table "release_format" {
+  "id" INTEGER [pk, increment, not null]
   "release_id" INTEGER [not null]
-  "name_description_quantity_content_TEXT_hash" INTEGER [not null]
   "description" VARCHAR(10000)
   "name" VARCHAR(255)
   "quantity" INTEGER
   "text" VARCHAR(5000)
-
-Indexes {
-  (release_id, name_description_quantity_content_TEXT_hash) [pk]
-}
 }
 
 Table "artist_alias" {
   "artist_id" INTEGER [not null]
   "alias_id" INTEGER [not null]
-
-Indexes {
-  (artist_id, alias_id) [pk]
-}
+  Indexes {
+    (artist_id, alias_id) [pk]
+  }
 }
 
 Table "artist_name_variation" {
   "artist_id" INTEGER [not null]
   "name_variation" VARCHAR(2000) [not null]
   "name_variation_hash" INTEGER [not null]
-
-Indexes {
-  (artist_id, name_variation_hash) [pk]
-}
+  Indexes {
+    (artist_id, name_variation_hash) [pk]
+  }
 }
 
 Table "master_artist" {
@@ -262,11 +242,11 @@ Indexes {
 
 Ref "fk_label_parent_id_label_id":"label"."id" < "label"."parent_id"
 
-Ref "fk_release_master_id_master":"master"."id" < "release"."master_id"
+Ref "fk_master_main_release_id_release":"release"."id" - "master"."main_release_id"
 
 Ref "fk_release_genre_release_id_release":"release"."id" < "release_genre"."release_id"
 
-Ref "fk_release_genre_genre_genre":"genre"."name" < "release_genre"."genre"
+Ref "fk_release_genre_genre_id_genre":"genre"."id" < "release_genre"."genre_id"
 
 Ref "fk_release_track_release_id_release":"release"."id" < "release_track"."release_id"
 
@@ -286,15 +266,15 @@ Ref "fk_master_video_master_id_master":"master"."id" < "master_video"."master_id
 
 Ref "fk_master_genre_master_id_master":"master"."id" < "master_genre"."master_id"
 
-Ref "fk_master_genre_genre_genre":"genre"."name" < "master_genre"."genre"
+Ref "fk_master_genre_genre_id_genre":"genre"."id" < "master_genre"."genre_id"
 
 Ref "fk_master_style_master_id_master":"master"."id" < "master_style"."master_id"
 
-Ref "fk_master_style_style_style":"style"."name" < "master_style"."style"
+Ref "fk_master_style_style_id_style":"style"."id" < "master_style"."style_id"
 
 Ref "fk_release_style_release_id_release":"release"."id" < "release_style"."release_id"
 
-Ref "fk_release_style_style_style":"style"."name" < "release_style"."style"
+Ref "fk_release_style_style_id_style":"style"."id" < "release_style"."style_id"
 
 Ref "fk_release_video_release_id_release":"release"."id" < "release_video"."release_id"
 
