@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/state303/open-discogs-erd/compare/v1.0.1...v1.1.0) (2022-11-13)
+
+
+### Features
+
+* adds new table 'data' ([e36ca47](https://github.com/state303/open-discogs-erd/commit/e36ca4732d30a859ec8795fdef836e70209f802f))
+
 ## [1.0.1](https://github.com/state303/open-discogs-erd/compare/v1.0.0...v1.0.1) (2022-11-11)
 
 
