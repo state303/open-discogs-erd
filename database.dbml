@@ -1,15 +1,5 @@
-Project OpenDiscogs {
-    database_type: 'PostgreSQL'
-    note: '''
-[//]: # ( {x-release-please-start-version} )
-# Open Discogs Project ERD v1.1.0
-[//]: # ( {x-release-please-end} )
-ERD, SQL Schema for Open Discogs Project
-'''
-}
-
 Table "data" {
-  "etag" VARCHAR(200) [pk, not null, unique, '''
+  "etag" VARCHAR(200) [pk, not null, unique, note: '''
   ETag representing this data being unique. Used for updating cache.
   ''']
   "generated_at" DATETIME [not null, note: '''
