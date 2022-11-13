@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/state303/open-discogs-erd/compare/v1.1.0...v1.1.1) (2022-11-13)
+
+
+### Bug Fixes
+
+* typo on note at data.etag ([55d645c](https://github.com/state303/open-discogs-erd/commit/55d645cc953250f6dd37733c2519e3acd0395dab))
+
 ## [1.1.0](https://github.com/state303/open-discogs-erd/compare/v1.0.1...v1.1.0) (2022-11-13)
 
 
