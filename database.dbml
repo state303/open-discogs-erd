@@ -2,7 +2,7 @@ Table "data" {
   "etag" VARCHAR(200) [pk, not null, unique, note: '''
   ETag representing this data being unique. Used for updating cache.
   ''']
-  "generated_at" DATETIME [not null, note: '''
+  "generated_at" TIMESTAMP [not null, note: '''
   Date this data is generated at.
   ''']
   "checksum" VARCHAR(200) [not null, note: '''
@@ -61,8 +61,8 @@ Table "release" {
   "country" VARCHAR(100)
   "data_quality" VARCHAR(100)
   "released_year" SMALLINT [not null, default: `-1`]
-  "released_month" TINYINT [not null, default: `-1`]
-  "released_day" TINYINT [not null, default: `-1`]
+  "released_month" SMALLINT [not null, default: `-1`]
+  "released_day" SMALLINT [not null, default: `-1`]
   "listed_release_date" VARCHAR(255)
   "is_master" BOOLEAN
   "notes" TEXT
