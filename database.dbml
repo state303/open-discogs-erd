@@ -8,6 +8,28 @@ ERD, SQL Schema for Open Discogs Project
 '''
 }
 
+Table "data" {
+  "etag" VARCHAR(200) [pk, not null, unique, '''
+  ETag representing this data being unique. Used for updating cache.
+  ''']
+  "generated_at" DATETIME [not null, note: '''
+  Date this data is generated at.
+  ''']
+  "checksum" VARCHAR(200) [not null, note: '''
+  Checksum to validate when fetching dump source.
+  ''']
+  "target_type" VARCHAR(20) [not null, note: '''
+  Type of data. Referred as artists, labels, masters, release.
+  Always uppercase.
+  ''']
+  "uri" VARCHAR(2048) [not null, note: '''
+  URI to download dump data file.
+  ''']
+  note: '''
+  Cached resource for keep tracking data dump updates (either being monthly or random occations)
+  '''
+}
+
 Table "style" {
   "id" INTEGER [pk, not null, increment]
   "name" VARCHAR(50) [not null, unique]
