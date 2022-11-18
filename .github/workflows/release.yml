@@ -12,6 +12,16 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: ☕ Setup Node
+        uses: actions/setup-node@v3
+      - name: 🧪 Install dbdocs
+        run: npm install -g dbdocs
+      - name: 💃 Install dbml/cli
+        run: npm install -g @dbml/cli
+      - name: 🔐 Check dbdocs
+        run: dbdocs
+      - name: 🤳🏻 Generate sql
+        run: dbml2sql database.dbml --mysql > mysql_schema.sql && dbml2sql database.dbml --postgres > postgres_schema.sql
       - name: 🙌 Prepare release
         id: release-please
         uses: google-github-actions/release-please-action@v3
