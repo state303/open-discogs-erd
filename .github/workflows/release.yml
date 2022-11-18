@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-node@v3
       - name: 🧪 Install dbdocs
         run: npm install -g dbdocs
+      - name: 💃 Install dbml/cli
+        run: npm install -g @dbml/cli
       - name: 🔐 Check dbdocs
         run: dbdocs
       - name: 🤳🏻 Generate sql
