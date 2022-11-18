@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/state303/open-discogs-erd/compare/v1.1.1...v1.1.2) (2022-11-13)
+
+
+### Bug Fixes
+
+* set types to more commonly supported one ([0531cd5](https://github.com/state303/open-discogs-erd/commit/0531cd57958c0afd7fa4a1f7d2af55be7e4f178c))
+
 ## [1.1.1](https://github.com/state303/open-discogs-erd/compare/v1.1.0...v1.1.1) (2022-11-13)
 
 
