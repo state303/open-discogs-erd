@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/state303/open-discogs-erd/compare/v1.1.2...v1.2.0) (2022-11-18)
+
+
+### Features
+
+* adds schema generation for release job ([4416b1a](https://github.com/state303/open-discogs-erd/commit/4416b1a4230bf7b0b21c5dcdbd56091ed92cec8f))
+
+
+### Bug Fixes
+
+* adds dbml-cli install step on release job ([62e7d87](https://github.com/state303/open-discogs-erd/commit/62e7d8765e833d99eb6cc5bddba9bf22411b661c))
+
 ## [1.1.2](https://github.com/state303/open-discogs-erd/compare/v1.1.1...v1.1.2) (2022-11-13)
 
 
