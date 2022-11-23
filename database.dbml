@@ -121,7 +121,7 @@ Table "release_identifier" {
   "release_id" INTEGER [not null]
   "description" TEXT 
   "type" VARCHAR(2500)
-  "value" VARCHAR(20000)
+  "value" TEXT
 }
 
 Table "master_video" {
