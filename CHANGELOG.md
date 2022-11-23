@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/state303/open-discogs-erd/compare/v1.2.2...v1.2.3) (2022-11-23)
+
+
+### Bug Fixes
+
+* replace release_identifier.value type to TEXT ([1d38c9f](https://github.com/state303/open-discogs-erd/commit/1d38c9fabe53b1f92fa7f30170917abb67342c8b))
+
 ## [1.2.2](https://github.com/state303/open-discogs-erd/compare/v1.2.1...v1.2.2) (2022-11-23)
 
 
