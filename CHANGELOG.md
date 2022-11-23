@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/state303/open-discogs-erd/compare/v1.2.0...v1.2.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* changes type for hash from int to bigint ([2a562be](https://github.com/state303/open-discogs-erd/commit/2a562be0b72e37ea9b9ed2c30dc406c2f5884def))
+
 ## [1.2.0](https://github.com/state303/open-discogs-erd/compare/v1.1.2...v1.2.0) (2022-11-18)
 
 
