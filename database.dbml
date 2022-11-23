@@ -23,6 +23,9 @@ Table "data" {
 Table "style" {
   "id" INTEGER [pk, not null, increment]
   "name" VARCHAR(50) [not null, unique]
+  Indexes {
+    id [name: "pk_style"]
+  }
 }
 
 Table "genre" {
@@ -116,7 +119,7 @@ Table "release_contract" {
 Table "release_identifier" {
   "id" INTEGER [pk, not null, increment]
   "release_id" INTEGER [not null]
-  "description" VARCHAR(20000)
+  "description" TEXT 
   "type" VARCHAR(2500)
   "value" VARCHAR(20000)
 }
