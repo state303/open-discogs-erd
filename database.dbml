@@ -96,7 +96,7 @@ Table "label_release" {
 
 Table "release_image" {
   "release_id" INTEGER [not null]
-  "url_hash" INTEGER [not null]
+  "url_hash" BIGINT [not null]
   "url" VARCHAR(2048) [not null]
   Indexes {
     (release_id, url_hash) [pk]
@@ -106,7 +106,7 @@ Table "release_image" {
 Table "release_contract" {
   "release_id" INTEGER [not null]
   "label_id" INTEGER [not null]
-  "contract_hash" INTEGER [not null]
+  "contract_hash" BIGINT [not null]
   "contract" VARCHAR(5000) [not null]
   Indexes {
     (release_id, label_id, contract_hash) [pk]
@@ -123,7 +123,7 @@ Table "release_identifier" {
 
 Table "master_video" {
   "master_id" INTEGER [not null]
-  "url_hash" INTEGER [not null]
+  "url_hash" BIGINT [not null]
   "url" VARCHAR(2048) [not null]
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
@@ -163,7 +163,7 @@ Table "release_video" {
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
   "url" VARCHAR(2048) [not null]
-  "url_hash" INTEGER [not null]
+  "url_hash" BIGINT [not null]
   Indexes {
     (release_id, url_hash) [pk]
   }  
@@ -171,7 +171,7 @@ Table "release_video" {
 
 Table "label_url" {
   "label_id" INTEGER [not null]
-  "url_hash" INTEGER [not null]
+  "url_hash" BIGINT [not null]
   "url" VARCHAR(2048) [not null]
   Indexes {
     (label_id, url_hash) [pk]
@@ -198,7 +198,7 @@ Table "artist_alias" {
 Table "artist_name_variation" {
   "artist_id" INTEGER [not null]
   "name_variation" VARCHAR(2000) [not null]
-  "name_variation_hash" INTEGER [not null]
+  "name_variation_hash" BIGINT [not null]
   Indexes {
     (artist_id, name_variation_hash) [pk]
   }
@@ -225,7 +225,7 @@ Indexes {
 Table "release_credited_artist" {
   "release_id" INTEGER [not null]
   "artist_id" INTEGER [not null]
-  "role_hash" INTEGER [not null]
+  "role_hash" BIGINT [not null]
   "role" VARCHAR(10000)
 
 Indexes {
@@ -235,7 +235,7 @@ Indexes {
 
 Table "artist_url" {
   "artist_id" INTEGER [not null]
-  "url_hash" INTEGER [not null]
+  "url_hash" BIGINT [not null]
   "url" VARCHAR(2048) [not null]
 
 Indexes {
