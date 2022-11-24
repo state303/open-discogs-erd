@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/state303/open-discogs-erd/compare/v1.2.3...v1.3.0) (2022-11-24)
+
+
+### Features
+
+* adds changelog to dbml prepend for publish ([226a79f](https://github.com/state303/open-discogs-erd/commit/226a79fb5361a2eafd603b92787e8d4a593f6189))
+
 ## [1.2.3](https://github.com/state303/open-discogs-erd/compare/v1.2.2...v1.2.3) (2022-11-23)
 
 
