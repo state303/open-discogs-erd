@@ -2,8 +2,8 @@ import re
 import sys
 from genericpath import exists
 
-project_name = 'Open Discogs'
-database_type = 'PostgreSQL'
+project_name = 'OpenDiscogs'
+database_type = 'Postgres'
 
 if len(sys.argv) < 2:
     print('missing path argument')
@@ -15,14 +15,16 @@ if len(sys.argv) >= 3:
 if len(sys.argv) >= 4:
     database_type = sys.argv[3]
 
-def get_prepend(project_name, db_type, readme):
+def get_prepend(project_name, db_type, readme, changelog):
     return '''Project {} {{
     database_type: \'{}\'
     note: \'\'\'
 {}
+
+{}
 \'\'\'
 }}
-'''.format(project_name.strip().replace(' ', ''), db_type.strip(), readme.strip())
+'''.format(project_name.strip().replace(' ', ''), db_type.strip(), readme.strip(), changelog.strip())
 
 def get_indent(depth):
     return '    '*depth
@@ -42,7 +44,7 @@ def read(path):
         exit(1)
 
 project_regex = re.compile(r"^.*([p|P][r|R][o|O][j|J][e|E][c|C][t|T][ a-zA-Z0-9.,_-]+[{]).*$")
-prepend = get_prepend(project_name, database_type, read('README.md'))
+prepend = get_prepend(project_name, database_type, read('README.md'), read('CHANGELOG.md'))
 lines = read(sys.argv[1]).splitlines()
 length = len(lines)
 depth = 0
