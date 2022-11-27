@@ -81,11 +81,14 @@ Table "release_genre" {
 }
 
 Table "release_track" {
-  "id" INTEGER [pk, not null, increment]
   "release_id" INTEGER [not null]
   "duration" VARCHAR(1500)
   "position" VARCHAR(1500)
   "title" VARCHAR(10000)
+  "title_hash" BIGINT [not null, note: "fnv32 encoded hash from title"]
+  Indexes {
+    (release_id, title_hash) [pk]
+  }
 }
 
 Table "label_release" {
@@ -99,7 +102,7 @@ Table "label_release" {
 
 Table "release_image" {
   "release_id" INTEGER [not null]
-  "url_hash" BIGINT [not null]
+  "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
   Indexes {
     (release_id, url_hash) [pk]
@@ -109,7 +112,7 @@ Table "release_image" {
 Table "release_contract" {
   "release_id" INTEGER [not null]
   "label_id" INTEGER [not null]
-  "contract_hash" BIGINT [not null]
+  "contract_hash" BIGINT [not null, note: "fnv32 encoded hash from contract"]
   "contract" VARCHAR(5000) [not null]
   Indexes {
     (release_id, label_id, contract_hash) [pk]
@@ -117,16 +120,19 @@ Table "release_contract" {
 }
 
 Table "release_identifier" {
-  "id" INTEGER [pk, not null, increment]
   "release_id" INTEGER [not null]
-  "description" TEXT 
+  "description" TEXT
   "type" VARCHAR(2500)
   "value" TEXT
+  "identifier_hash" BIGINT [not null, note: "fnv32 encoded hash from string which is description, type, value appended in order"]
+  Indexes {
+    (release_id, identifier_hash) [pk]
+  }
 }
 
 Table "master_video" {
   "master_id" INTEGER [not null]
-  "url_hash" BIGINT [not null]
+  "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
@@ -166,7 +172,7 @@ Table "release_video" {
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
   "url" VARCHAR(2048) [not null]
-  "url_hash" BIGINT [not null]
+  "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   Indexes {
     (release_id, url_hash) [pk]
   }  
@@ -174,7 +180,7 @@ Table "release_video" {
 
 Table "label_url" {
   "label_id" INTEGER [not null]
-  "url_hash" BIGINT [not null]
+  "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
   Indexes {
     (label_id, url_hash) [pk]
@@ -182,12 +188,15 @@ Table "label_url" {
 }
 
 Table "release_format" {
-  "id" INTEGER [pk, increment, not null]
   "release_id" INTEGER [not null]
   "description" VARCHAR(10000)
   "name" VARCHAR(255)
   "quantity" INTEGER
   "text" VARCHAR(5000)
+  "format_hash" BIGINT [not null, note: "fnv32 encoded hash from string which is description, name, quantity, text appended in order"]
+  Indexes {
+    (release_id, format_hash) [pk]
+  }
 }
 
 Table "artist_alias" {
@@ -201,7 +210,7 @@ Table "artist_alias" {
 Table "artist_name_variation" {
   "artist_id" INTEGER [not null]
   "name_variation" VARCHAR(2000) [not null]
-  "name_variation_hash" BIGINT [not null]
+  "name_variation_hash" BIGINT [not null, note: "fnv32 encoded hash from name_variation"]
   Indexes {
     (artist_id, name_variation_hash) [pk]
   }
@@ -228,8 +237,8 @@ Indexes {
 Table "release_credited_artist" {
   "release_id" INTEGER [not null]
   "artist_id" INTEGER [not null]
-  "role_hash" BIGINT [not null]
-  "role" VARCHAR(10000)
+  "role_hash" BIGINT [not null, note: "fnv32 encoded hash from role"]
+  "role" VARCHAR(10000) [note: "role of an artist for a release"]
 
 Indexes {
   (release_id, artist_id, role_hash) [pk]
@@ -238,7 +247,7 @@ Indexes {
 
 Table "artist_url" {
   "artist_id" INTEGER [not null]
-  "url_hash" BIGINT [not null]
+  "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
 
 Indexes {
