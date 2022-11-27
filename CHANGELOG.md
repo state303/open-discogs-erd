@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/state303/open-discogs-erd/compare/v1.3.0...v1.3.1) (2022-11-27)
+
+
+### Bug Fixes
+
+* removes possible collision by hash ([39f8014](https://github.com/state303/open-discogs-erd/commit/39f8014fac6b95a5fc8d42120818a55e1032a07b))
+
 ## [1.3.0](https://github.com/state303/open-discogs-erd/compare/v1.2.3...v1.3.0) (2022-11-24)
 
 
