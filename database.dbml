@@ -55,7 +55,7 @@ Table "master" {
   "data_quality" VARCHAR(100)
   "title" VARCHAR(2000)
   "main_release_id" INTEGER
-  "released_year" SMALLINT [not null, default: `-1`]
+  "released_year" SMALLINT
 }
 
 Table "release" {
@@ -63,9 +63,9 @@ Table "release" {
   "title" VARCHAR(10000)
   "country" VARCHAR(100)
   "data_quality" VARCHAR(100)
-  "released_year" SMALLINT [not null, default: `-1`]
-  "released_month" SMALLINT [not null, default: `-1`]
-  "released_day" SMALLINT [not null, default: `-1`]
+  "released_year" SMALLINT
+  "released_month" SMALLINT
+  "released_day" SMALLINT
   "listed_release_date" VARCHAR(255)
   "is_master" BOOLEAN
   "notes" TEXT
