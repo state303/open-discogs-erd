@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/state303/open-discogs-erd/compare/v1.3.1...v1.3.2) (2022-11-28)
+
+
+### Bug Fixes
+
+* removes -1 as default values ([7b64a0c](https://github.com/state303/open-discogs-erd/commit/7b64a0cf43feb7eb2f672e11736440c09fa3a207))
+
 ## [1.3.1](https://github.com/state303/open-discogs-erd/compare/v1.3.0...v1.3.1) (2022-11-27)
 
 
