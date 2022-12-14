@@ -39,7 +39,7 @@ CREATE TABLE `master` (
   `data_quality` VARCHAR(100),
   `title` VARCHAR(2000),
   `main_release_id` INTEGER,
-  `released_year` SMALLINT NOT NULL DEFAULT (-1)
+  `released_year` SMALLINT
 );
 
 CREATE TABLE `release` (
@@ -47,9 +47,9 @@ CREATE TABLE `release` (
   `title` VARCHAR(10000),
   `country` VARCHAR(100),
   `data_quality` VARCHAR(100),
-  `released_year` SMALLINT NOT NULL DEFAULT (-1),
-  `released_month` SMALLINT NOT NULL DEFAULT (-1),
-  `released_day` SMALLINT NOT NULL DEFAULT (-1),
+  `released_year` SMALLINT,
+  `released_month` SMALLINT,
+  `released_day` SMALLINT,
   `listed_release_date` VARCHAR(255),
   `is_master` BOOLEAN,
   `notes` TEXT,
@@ -59,6 +59,7 @@ CREATE TABLE `release` (
 CREATE TABLE `release_genre` (
   `release_id` INTEGER NOT NULL,
   `genre_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `genre_id`)
 );
 
@@ -68,6 +69,7 @@ CREATE TABLE `release_track` (
   `position` VARCHAR(1500),
   `title` VARCHAR(10000),
   `title_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from title',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `title_hash`)
 );
 
@@ -75,6 +77,7 @@ CREATE TABLE `label_release` (
   `label_id` INTEGER NOT NULL,
   `release_id` INTEGER NOT NULL,
   `category_notation` VARCHAR(1000),
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`label_id`, `release_id`)
 );
 
@@ -82,6 +85,7 @@ CREATE TABLE `release_image` (
   `release_id` INTEGER NOT NULL,
   `url_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from url',
   `url` VARCHAR(2048) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `url_hash`)
 );
 
@@ -90,6 +94,7 @@ CREATE TABLE `release_contract` (
   `label_id` INTEGER NOT NULL,
   `contract_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from contract',
   `contract` VARCHAR(5000) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `label_id`, `contract_hash`)
 );
 
@@ -99,6 +104,7 @@ CREATE TABLE `release_identifier` (
   `type` VARCHAR(2500),
   `value` TEXT,
   `identifier_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from string which is description, type, value appended in order',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `identifier_hash`)
 );
 
@@ -108,24 +114,28 @@ CREATE TABLE `master_video` (
   `url` VARCHAR(2048) NOT NULL,
   `description` VARCHAR(4000),
   `title` VARCHAR(1000),
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`master_id`, `url_hash`)
 );
 
 CREATE TABLE `master_genre` (
   `master_id` INTEGER NOT NULL,
   `genre_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`master_id`, `genre_id`)
 );
 
 CREATE TABLE `master_style` (
   `master_id` INTEGER NOT NULL,
   `style_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`master_id`, `style_id`)
 );
 
 CREATE TABLE `release_style` (
   `release_id` INTEGER NOT NULL,
   `style_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `style_id`)
 );
 
@@ -135,6 +145,7 @@ CREATE TABLE `release_video` (
   `title` VARCHAR(1000),
   `url` VARCHAR(2048) NOT NULL,
   `url_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from url',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `url_hash`)
 );
 
@@ -142,6 +153,7 @@ CREATE TABLE `label_url` (
   `label_id` INTEGER NOT NULL,
   `url_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from url',
   `url` VARCHAR(2048) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`label_id`, `url_hash`)
 );
 
@@ -152,12 +164,14 @@ CREATE TABLE `release_format` (
   `quantity` INTEGER,
   `text` VARCHAR(5000),
   `format_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from string which is description, name, quantity, text appended in order',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `format_hash`)
 );
 
 CREATE TABLE `artist_alias` (
   `artist_id` INTEGER NOT NULL,
   `alias_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`artist_id`, `alias_id`)
 );
 
@@ -165,18 +179,21 @@ CREATE TABLE `artist_name_variation` (
   `artist_id` INTEGER NOT NULL,
   `name_variation` VARCHAR(2000) NOT NULL,
   `name_variation_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from name_variation',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`artist_id`, `name_variation_hash`)
 );
 
 CREATE TABLE `master_artist` (
   `artist_id` INTEGER NOT NULL,
   `master_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`artist_id`, `master_id`)
 );
 
 CREATE TABLE `release_artist` (
   `release_id` INTEGER NOT NULL,
   `artist_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `artist_id`)
 );
 
@@ -185,6 +202,7 @@ CREATE TABLE `release_credited_artist` (
   `artist_id` INTEGER NOT NULL,
   `role_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from role',
   `role` VARCHAR(10000) COMMENT 'role of an artist for a release',
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`release_id`, `artist_id`, `role_hash`)
 );
 
@@ -192,12 +210,14 @@ CREATE TABLE `artist_url` (
   `artist_id` INTEGER NOT NULL,
   `url_hash` BIGINT NOT NULL COMMENT 'fnv32 encoded hash from url',
   `url` VARCHAR(2048) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`artist_id`, `url_hash`)
 );
 
 CREATE TABLE `artist_group` (
   `artist_id` INTEGER NOT NULL,
   `group_id` INTEGER NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT (NOW()) COMMENT 'created time',
   PRIMARY KEY (`artist_id`, `group_id`)
 );
 
