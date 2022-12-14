@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/state303/open-discogs-erd/compare/v1.3.2...v1.4.0) (2022-12-14)
+
+
+### Features
+
+* adds created dates for all relations to track ([93d66c8](https://github.com/state303/open-discogs-erd/commit/93d66c8d6b3947a43d5bb6ffbbddf1cf7f3ec493))
+
 ## [1.3.2](https://github.com/state303/open-discogs-erd/compare/v1.3.1...v1.3.2) (2022-11-28)
 
 
