@@ -21,16 +21,16 @@ Table "data" {
 }
 
 Table "style" {
-  "id" INTEGER [pk, not null, increment]
-  "name" VARCHAR(50) [not null, unique]
+  "id" INTEGER [pk, not null, increment, note: "id of style"]
+  "name" VARCHAR(50) [not null, unique, note: "name of style"]
   Indexes {
     id [name: "pk_style"]
   }
 }
 
 Table "genre" {
-  "id" INTEGER [pk, not null, increment]
-  "name" VARCHAR(50) [not null, unique]
+  "id" INTEGER [pk, not null, increment, note: "id of genre"]
+  "name" VARCHAR(50) [not null, unique, note: "name of genre"]
 }
 
 Table "artist" {
@@ -220,8 +220,8 @@ Table "artist_alias" {
 }
 
 Table "artist_name_variation" {
-  "artist_id" INTEGER [not null]
-  "name_variation" VARCHAR(2000) [not null]
+  "artist_id" INTEGER [not null, note: "id of artist"]
+  "name_variation" VARCHAR(2000) [not null, note: "artist's other name"]
   "name_variation_hash" BIGINT [not null, note: "fnv32 encoded hash from name_variation"]
   "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
@@ -230,8 +230,8 @@ Table "artist_name_variation" {
 }
 
 Table "master_artist" {
-  "artist_id" INTEGER [not null]
-  "master_id" INTEGER [not null]
+  "artist_id" INTEGER [not null, note: "artist id of the master release"]
+  "master_id" INTEGER [not null, note: "master id"]
   "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (artist_id, master_id) [pk]
