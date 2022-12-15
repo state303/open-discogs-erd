@@ -54,7 +54,6 @@ Table "master" {
   "id" INTEGER [pk, not null]
   "data_quality" VARCHAR(100)
   "title" VARCHAR(2000)
-  "main_release_id" INTEGER
   "released_year" SMALLINT
 }
 
@@ -66,8 +65,9 @@ Table "release" {
   "released_year" SMALLINT
   "released_month" SMALLINT
   "released_day" SMALLINT
-  "listed_release_date" VARCHAR(255)
-  "is_master" BOOLEAN
+  "listed_release_date" VARCHAR(255) 
+  "master_id"  INTEGER [note: "id of master release this release belongs to"]
+  "is_master" BOOLEAN [note: "indicates i this release is main release of the master release"]
   "notes" TEXT
   "status" VARCHAR(255)
 }
@@ -75,7 +75,7 @@ Table "release" {
 Table "release_genre" {
   "release_id" INTEGER [not null]
   "genre_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, genre_id) [pk]
   }
@@ -87,7 +87,7 @@ Table "release_track" {
   "position" VARCHAR(1500)
   "title" VARCHAR(10000)
   "title_hash" BIGINT [not null, note: "fnv32 encoded hash from title"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, title_hash) [pk]
   }
@@ -97,7 +97,7 @@ Table "label_release" {
   "label_id" INTEGER [not null]
   "release_id" INTEGER [not null]
   "category_notation" VARCHAR(1000)
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (label_id, release_id) [pk]
   }
@@ -107,7 +107,7 @@ Table "release_image" {
   "release_id" INTEGER [not null]
   "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, url_hash) [pk]
   }
@@ -118,7 +118,7 @@ Table "release_contract" {
   "label_id" INTEGER [not null]
   "contract_hash" BIGINT [not null, note: "fnv32 encoded hash from contract"]
   "contract" VARCHAR(5000) [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, label_id, contract_hash) [pk]
   }
@@ -130,9 +130,21 @@ Table "release_identifier" {
   "type" VARCHAR(2500)
   "value" TEXT
   "identifier_hash" BIGINT [not null, note: "fnv32 encoded hash from string which is description, type, value appended in order"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, identifier_hash) [pk]
+  }
+}
+
+Table "master_track" {
+  "master_id" INTEGER [not null]
+  "duration" VARCHAR(1500)
+  "position" VARCHAR(1500)
+  "title" VARCHAR(10000)
+  "title_hash" BIGINT [not null, note: "fnv32 encoded hash from title"]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  Indexes {
+    (master_id, title_hash) [pk]
   }
 }
 
@@ -142,7 +154,7 @@ Table "master_video" {
   "url" VARCHAR(2048) [not null]
   "description" VARCHAR(4000)
   "title" VARCHAR(1000)
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (master_id, url_hash) [pk]
   }
@@ -151,7 +163,7 @@ Table "master_video" {
 Table "master_genre" {
   "master_id" INTEGER [not null]
   "genre_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (master_id, genre_id) [pk]
   }
@@ -160,7 +172,7 @@ Table "master_genre" {
 Table "master_style" {
   "master_id" INTEGER [not null]
   "style_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (master_id, style_id) [pk]
   }
@@ -169,7 +181,7 @@ Table "master_style" {
 Table "release_style" {
   "release_id" INTEGER [not null]
   "style_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, style_id) [pk]
   }
@@ -181,7 +193,7 @@ Table "release_video" {
   "title" VARCHAR(1000)
   "url" VARCHAR(2048) [not null]
   "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, url_hash) [pk]
   }  
@@ -191,7 +203,7 @@ Table "label_url" {
   "label_id" INTEGER [not null]
   "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (label_id, url_hash) [pk]
   }
@@ -204,7 +216,7 @@ Table "release_format" {
   "quantity" INTEGER
   "text" VARCHAR(5000)
   "format_hash" BIGINT [not null, note: "fnv32 encoded hash from string which is description, name, quantity, text appended in order"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (release_id, format_hash) [pk]
   }
@@ -213,7 +225,7 @@ Table "release_format" {
 Table "artist_alias" {
   "artist_id" INTEGER [not null]
   "alias_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (artist_id, alias_id) [pk]
   }
@@ -223,7 +235,7 @@ Table "artist_name_variation" {
   "artist_id" INTEGER [not null, note: "id of artist"]
   "name_variation" VARCHAR(2000) [not null, note: "artist's other name"]
   "name_variation_hash" BIGINT [not null, note: "fnv32 encoded hash from name_variation"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
   Indexes {
     (artist_id, name_variation_hash) [pk]
   }
@@ -232,7 +244,7 @@ Table "artist_name_variation" {
 Table "master_artist" {
   "artist_id" INTEGER [not null, note: "artist id of the master release"]
   "master_id" INTEGER [not null, note: "master id"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (artist_id, master_id) [pk]
 }
@@ -241,7 +253,7 @@ Indexes {
 Table "release_artist" {
   "release_id" INTEGER [not null]
   "artist_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (release_id, artist_id) [pk]
 }
@@ -252,7 +264,7 @@ Table "release_credited_artist" {
   "artist_id" INTEGER [not null]
   "role_hash" BIGINT [not null, note: "fnv32 encoded hash from role"]
   "role" VARCHAR(10000) [note: "role of an artist for a release"]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (release_id, artist_id, role_hash) [pk]
 }
@@ -262,7 +274,7 @@ Table "artist_url" {
   "artist_id" INTEGER [not null]
   "url_hash" BIGINT [not null, note: "fnv32 encoded hash from url"]
   "url" VARCHAR(2048) [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (artist_id, url_hash) [pk]
 }
@@ -271,15 +283,13 @@ Indexes {
 Table "artist_group" {
   "artist_id" INTEGER [not null]
   "group_id" INTEGER [not null]
-  "created_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
+  "updated_at" TIMESTAMP [not null, note: "created time", default: `NOW()`]
 Indexes {
   (artist_id, group_id) [pk]
 }
 }
 
 Ref "fk_label_parent_id_label_id":"label"."id" < "label"."parent_id"
-
-Ref "fk_master_main_release_id_release":"release"."id" - "master"."main_release_id"
 
 Ref "fk_release_genre_release_id_release":"release"."id" < "release_genre"."release_id"
 
@@ -343,3 +353,4 @@ Ref "fk_artist_group_artist_id_artist":"artist"."id" < "artist_group"."artist_id
 
 Ref "fk_artist_group_group_id_artist":"artist"."id" < "artist_group"."group_id"
 
+Ref "fk_release_master_id_master":"master"."id" < "release"."master_id"

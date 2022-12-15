@@ -1,0 +1,54 @@
+2022-12-15T04:01:17.030Z
+SyntaxError: You have a syntax error at "database.dbml" line 356 column 46. Expected "." but " " found.
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:55:13
+    at Array.forEach (<anonymous>)
+    at generate (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at exportHandler (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:27)
+    at Object.dbml2sql (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/index.js:27:23)
+    at Object.<anonymous> (/opt/homebrew/lib/node_modules/@dbml/cli/bin/dbml2sql.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1205:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1259:10)
+    at Module.load (node:internal/modules/cjs/loader:1068:32)
+    at Module._load (node:internal/modules/cjs/loader:909:12)
+
+ROOT_ERROR:
+SyntaxError: Expected "." but " " found.
+    at peg$buildStructuredError (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/dbmlParser.js:1163:12)
+    at Object.peg$parse [as parse] (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/dbmlParser.js:8164:11)
+    at Function.parseDBMLToJSON (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:54:37)
+    at Function.parse (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:81:32)
+    at Object._export [as export] (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/export/index.js:15:37)
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:69
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:52:23
+    at Array.forEach (<anonymous>)
+    at generate (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at exportHandler (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:27)
+{"start":{"offset":10791,"line":356,"column":46},"end":{"offset":10792,"line":356,"column":47}}
+
+2022-12-15T04:01:23.986Z
+SyntaxError: You have a syntax error at "database.dbml" line 356 column 46. Expected "." but " " found.
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:55:13
+    at Array.forEach (<anonymous>)
+    at generate (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at exportHandler (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:27)
+    at Object.dbml2sql (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/index.js:27:23)
+    at Object.<anonymous> (/opt/homebrew/lib/node_modules/@dbml/cli/bin/dbml2sql.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1205:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1259:10)
+    at Module.load (node:internal/modules/cjs/loader:1068:32)
+    at Module._load (node:internal/modules/cjs/loader:909:12)
+
+ROOT_ERROR:
+SyntaxError: Expected "." but " " found.
+    at peg$buildStructuredError (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/dbmlParser.js:1163:12)
+    at Object.peg$parse [as parse] (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/dbmlParser.js:8164:11)
+    at Function.parseDBMLToJSON (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:54:37)
+    at Function.parse (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:81:32)
+    at Object._export [as export] (/opt/homebrew/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/export/index.js:15:37)
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:69
+    at /opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:52:23
+    at Array.forEach (<anonymous>)
+    at generate (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at exportHandler (/opt/homebrew/lib/node_modules/@dbml/cli/lib/cli/export.js:38:27)
+{"start":{"offset":10791,"line":356,"column":46},"end":{"offset":10792,"line":356,"column":47}}
+
