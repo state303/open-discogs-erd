@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/state303/open-discogs-erd/compare/v1.4.0...v2.0.0) (2022-12-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **release:** moves main release indication to release
+
+### Bug Fixes
+
+* **release:** moves main release indication to release ([afa241f](https://github.com/state303/open-discogs-erd/commit/afa241f8c6ea1d2f7d3acee4249c12309312baf3))
+
 ## [1.4.0](https://github.com/state303/open-discogs-erd/compare/v1.3.2...v1.4.0) (2022-12-14)
 
 
