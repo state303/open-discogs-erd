@@ -4,30 +4,45 @@ on:
   push:
     branches:
       - beta
-  workflow_run:
-    workflows: ["Release"]
-    types:
-      - completed
+    paths:
+      - database.dbml
+      - prepend.py
+      - README.md
+      - CHANGELOG.md
   workflow_dispatch:
-  
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dbdocs-beta
+  cancel-in-progress: false
+
 jobs:
   publish:
     name: Publish
+    if: github.ref == 'refs/heads/beta'
     runs-on: ubuntu-latest
     steps:
-      - name: 🐍 Setup Python
-        uses: actions/setup-python@v4
-      - name: ☕ Setup Node
-        uses: actions/setup-node@v3
-      - name: 🧪 Install dbdocs
+      - name: Setup Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.13'
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24'
+      - name: Install dbdocs
         run: npm install -g dbdocs
-      - name: 🔐 Check dbdocs
+      - name: Check dbdocs
         run: dbdocs
-      - name: ✨ Checkout repository
-        uses: actions/checkout@v3
-      - name: 🎱 Write prepended dbml
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Write prepended dbml
         run: python prepend.py database.dbml 'Open Discogs Beta'
-      - name: 📦 Update dbdocs
+      - name: Update dbdocs
         env:
           DBDOCS_TOKEN: ${{ secrets.DBDOCS_TOKEN }}
         run: dbdocs build ./open_discogs_beta_prepended.dbml
