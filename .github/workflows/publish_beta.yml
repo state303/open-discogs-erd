@@ -45,4 +45,4 @@ jobs:
       - name: Update dbdocs
         env:
           DBDOCS_TOKEN: ${{ secrets.DBDOCS_TOKEN }}
-        run: dbdocs build ./open_discogs_beta_prepended.dbml
+        run: dbdocs build --project state303/OpenDiscogsBeta ./open_discogs_beta_prepended.dbml
