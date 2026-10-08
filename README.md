@@ -3,7 +3,7 @@
 [//]: # ( {x-release-please-end} )
 
 Historical DBML and SQL schema diagrams for OpenDiscogs. The published diagram
-is available at [dbdocs](https://dbdocs.io/state303/OpenDiscogs).
+is available at [dbdocs](https://dbdocs.io/state3031aae03758e/OpenDiscogs).
 
 Current PostgreSQL migrations and generated Go and Java models live in
 [open-discogs-model](https://github.com/dsub-io/open-discogs-model). Use those
