@@ -22,7 +22,7 @@ jobs:
         with:
           default-branch: ${{ github.ref_name }}
           release-type: simple
-          token: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           extra-files: |
             database.dbml
             prepend.py
